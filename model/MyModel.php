@@ -5,10 +5,19 @@ class MyModel
 	function insert($regno,$name,$mobile,$depname,$course,$cpassword,$email,$uname,$semno,$year)
 	{
 		include '../config/connection.php';
-		$sql="insert into student(regno,name,mobile,depname,coursename,password,email,username,semno,year) values('".$regno."','".$name."','".$mobile."','".$depname."','".$course."','".$cpassword."','".$email."','".$uname."','".$semno."','".$year."')";
-		if(mysqli_query($conn,$sql))
+		$sq="select * from student where username='".$uname."'";
+		if(mysqli_query($conn,$sq))
+		{ 
+			echo "Already existing username";
+			mysqli_close($conn);
+		}
+		else
 		{
-			echo "registred successfully";
+			$sql="insert into student(regno,name,mobile,depname,coursename,password,email,username,semno,year) values('".$regno."','".$name."','".$mobile."','".$depname."','".$course."','".$cpassword."','".$email."','".$uname."','".$semno."','".$year."')";
+			if(mysqli_query($conn,$sql))
+			{
+				echo "registred successfully";
+			}
 		}
 	}
 	
@@ -94,10 +103,19 @@ class MyModel
 	function addadmin($name,$adminid,$pass,$adminlv)
 	{
 		include '../config/connection.php';
-		$sql="insert into admin(username,adminid,adminlv,password) values('".$name."','".$adminid."','".$adminlv."','".$pass."')";
-		if(mysqli_query($conn,$sql))
+		$sq="select * from admin where username='".$name."'";
+		if(mysqli_query($conn,$sq))
+		{ 
+			echo "Already existing username";
+			mysqli_close($conn);
+		}
+		else
 		{
-			echo "admin added";
+			$sql="insert into admin(username,adminid,adminlv,password) values('".$name."','".$adminid."','".$adminlv."','".$pass."')";
+			if(mysqli_query($conn,$sql))
+			{
+				echo "admin added";
+			}
 		}
 	}
 	#----------------superuser remove admin----------------
