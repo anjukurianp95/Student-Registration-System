@@ -6,10 +6,13 @@ class MyModel
 	{
 		include '../config/connection.php';
 		$sq="select * from student where username='".$uname."'";
-		if(mysqli_query($conn,$sq))
-		{ 
-			echo "Already existing username";
-			mysqli_close($conn);
+		$result=mysqli_query($conn,$sq);
+		if(mysqli_num_rows($result)>0)
+		{
+			{ 
+				echo "Already existing username";
+				mysqli_close($conn);
+			}
 		}
 		else
 		{
@@ -104,10 +107,13 @@ class MyModel
 	{
 		include '../config/connection.php';
 		$sq="select * from admin where username='".$name."'";
-		if(mysqli_query($conn,$sq))
-		{ 
-			echo "Already existing username";
-			mysqli_close($conn);
+		$result=mysqli_query($conn,$sq);
+		if(mysqli_num_rows($result)>0)
+		{
+			{ 
+				echo "Already existing username";
+				mysqli_close($conn);
+			}
 		}
 		else
 		{
